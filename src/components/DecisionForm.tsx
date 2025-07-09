@@ -1,49 +1,56 @@
-import React, { useState } from 'react';
-import { Plus, Shuffle } from 'lucide-react';
-import { OptionInput } from './OptionInput';
-import { AdBanner } from './AdBanner';
-import { generateId } from '../utils/decision';
-import { Option } from '../types';
+import React, { useState } from "react";
+import { Plus, Shuffle } from "lucide-react";
+import { OptionInput } from "./OptionInput";
+import { AdBanner } from "./AdBanner";
+import { generateId } from "../utils/decision";
+import { Option } from "../types";
 
 interface DecisionFormProps {
   onDecide: (options: string[]) => void;
   isLoading: boolean;
 }
 
-export const DecisionForm: React.FC<DecisionFormProps> = ({ onDecide, isLoading }) => {
+export const DecisionForm: React.FC<DecisionFormProps> = ({
+  onDecide,
+  isLoading,
+}) => {
   const [options, setOptions] = useState<Option[]>([
-    { id: generateId(), value: '' },
-    { id: generateId(), value: '' }
+    { id: generateId(), value: "" },
+    { id: generateId(), value: "" },
   ]);
 
   const handleOptionChange = (id: string, value: string) => {
-    setOptions(prev => prev.map(option => 
-      option.id === id ? { ...option, value } : option
-    ));
+    setOptions((prev) =>
+      prev.map((option) => (option.id === id ? { ...option, value } : option))
+    );
   };
 
   const addOption = () => {
-    if (options.length < 5) {
-      setOptions(prev => [...prev, { id: generateId(), value: '' }]);
+    if (options.length < 99) {
+      setOptions((prev) => [...prev, { id: generateId(), value: "" }]);
     }
   };
 
   const removeOption = (id: string) => {
     if (options.length > 2) {
-      setOptions(prev => prev.filter(option => option.id !== id));
+      setOptions((prev) => prev.filter((option) => option.id !== id));
     }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const optionValues = options.map(option => option.value.trim()).filter(Boolean);
-    
+    const optionValues = options
+      .map((option) => option.value.trim())
+      .filter(Boolean);
+
     if (optionValues.length >= 2) {
       onDecide(optionValues);
     }
   };
 
-  const validOptions = options.filter(option => option.value.trim() !== '').length;
+  const validOptions = options.filter(
+    (option) => option.value.trim() !== ""
+  ).length;
   const canSubmit = validOptions >= 2;
 
   return (
@@ -62,7 +69,7 @@ export const DecisionForm: React.FC<DecisionFormProps> = ({ onDecide, isLoading 
         ))}
       </div>
 
-      {options.length < 5 && (
+      {options.length < 99 && (
         <button
           type="button"
           onClick={addOption}
@@ -73,21 +80,14 @@ export const DecisionForm: React.FC<DecisionFormProps> = ({ onDecide, isLoading 
         </button>
       )}
 
-      {/* Contextual ad placement - only shows when user has 3+ options */}
-      {validOptions >= 3 && (
-        <div className="py-2">
-          <AdBanner size="small" position="sidebar" className="opacity-70" />
-        </div>
-      )}
-
       <div className="pt-4">
         <button
           type="submit"
           disabled={!canSubmit || isLoading}
           className={`w-full px-6 py-4 rounded-xl font-semibold text-lg transition-all duration-200 flex items-center justify-center gap-2 ${
             canSubmit && !isLoading
-              ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5'
-              : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              : "bg-gray-300 text-gray-500 cursor-not-allowed"
           }`}
         >
           {isLoading ? (
