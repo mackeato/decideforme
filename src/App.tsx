@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Header } from "./components/Header";
-import { AdBanner } from "./components/AdBanner";
 import { ModeSelector } from "./components/ModeSelector";
 import { DecisionForm } from "./components/DecisionForm";
 import { CoinFlip } from "./components/CoinFlip";
@@ -121,10 +120,7 @@ function App() {
       <div className="container mx-auto px-4 py-8 max-w-2xl">
         <Header />
 
-        {/* Header Ad Banner - Natural placement after hero */}
-        <div className="mb-8">
-          <AdBanner size="medium" position="header" />
-        </div>
+  
 
         <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 md:p-8 border border-white/20">
           <ModeSelector currentMode={mode} onModeChange={handleModeChange} />
@@ -145,26 +141,16 @@ function App() {
           />
         </div>
 
-        {/* Result Ad Banner - Shows after decision is made */}
-        {selectedOption && !isAnimating && (
-          <div className="mt-6">
-            <AdBanner size="small" position="result" className="opacity-80" />
-          </div>
-        )}
+        
 
         <footer className="text-center mt-8 text-gray-500 text-sm">
-          {/* Footer Ad Banner - Subtle placement above footer */}
-          <div className="mb-6">
-            <AdBanner size="large" position="footer" />
-          </div>
+          
           <p>
-            Built
+       
             <a href="#" className="hover:text-gray-700 transition-colors">
-              by
+             Built   by   Mackeato
             </a>{" "}
-            •{" "}
-            <a href="#" className="hover:text-gray-700 transition-colors">
-              Mackeato
+          
             </a>
           </p>
         </footer>
