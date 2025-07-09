@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Header } from "./components/Header";
+import { AdBanner } from "./components/AdBanner";
 import { ModeSelector } from "./components/ModeSelector";
 import { DecisionForm } from "./components/DecisionForm";
 import { CoinFlip } from "./components/CoinFlip";
@@ -120,8 +121,6 @@ function App() {
       <div className="container mx-auto px-4 py-8 max-w-2xl">
         <Header />
 
-  
-
         <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 md:p-8 border border-white/20">
           <ModeSelector currentMode={mode} onModeChange={handleModeChange} />
 
@@ -141,16 +140,15 @@ function App() {
           />
         </div>
 
-        
-
         <footer className="text-center mt-8 text-gray-500 text-sm">
-          
           <p>
-       
+            Built •{" "}
             <a href="#" className="hover:text-gray-700 transition-colors">
-             Built   by   Mackeato
+              by
             </a>{" "}
-          
+            •{" "}
+            <a href="#" className="hover:text-gray-700 transition-colors">
+              Mackeato
             </a>
           </p>
         </footer>
